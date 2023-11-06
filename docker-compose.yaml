@@ -4,7 +4,7 @@ services:
     container_name: server
     build: .
     ports:
-      - 8080:80
+      - 8000:8000
     volumes:
       - ./html:/var/www/html
   database:
@@ -15,11 +15,21 @@ services:
     restart: always
     environment:
       MARIADB_ROOT_PASSWORD: 1234
+      MARIADB_DATABASE: biblioteca
   phpmyadmin:
     container_name: phpmyadmin
     image: phpmyadmin:5.2
     restart: always
     ports:
-      - 8081:80
+      - 8001:80
     environment:
       PMA_ARBITRARY: 1
+  # nginx:
+  #   image: nginx:1.17-alpine
+  #   container_name: nginx
+  #   restart: unless-stopped
+  #   ports:
+  #     - 9000:80
+  #   volumes:
+  #     - ./html:/var/www
+  #     - ./nginx:/etc/nginx/conf.d
